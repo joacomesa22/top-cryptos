@@ -12,7 +12,11 @@ Astro - Tailwind
 
 ## API utilizada
 
-https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10
+[Coin Gecko](https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10)
+
+## Demo
+
+[Live Demo](https://top-cryptos.vercel.app/)
 
 ## Screenshots y vista previa
 
