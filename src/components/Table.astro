@@ -1,0 +1,65 @@
+---
+    const getData = async () => {
+        try {
+            const res = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10")
+            const data = await res.json()
+          return data
+        } catch (error) {
+            return error
+        }
+     }
+     const data = await getData()
+---
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+    <table class="w-full text-sm text-left rtl:text-right text-[#F2F2F2]">
+        <thead class="text-xs text-[#0D0D0D] bg-gradient-to-bl from-violet-300 to-violet-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Assets
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   24H
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Market Cap
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {Array.isArray(data) ? data.map(item => {
+                return (
+                <tr class="even:bg-[#0D0D0D] odd:bg-[#000000] border-b ">
+                    <th scope="row" class="flex items-center gap-2 px-6 py-4 font-medium text-[#F2F2F2] whitespace-nowrap ">
+                        <img src={item.image} alt="crypto currency image" class="max-w-[30px]">
+                        {item.name}
+                    </th>
+                    <td class="px-6 py-4">
+                        ${item.current_price.toFixed(2)}
+                    </td>
+                    {item.price_change_percentage_24h > 0 ? 
+                        <td class="px-6 py-4 text-green-600">
+                            <div class="flex items-center gap-1">
+                                <svg width="12" height="12" viewBox="0 0 600 600"><path d="M600 600H0L300 0L600 600Z" fill="#16a34a"/></svg>
+                                {item.price_change_percentage_24h.toFixed(2)}
+                                </div>
+                        </td>
+                        :
+                        <td class="px-6 py-4 text-red-600">
+                            <div class="flex items-center gap-1">
+                                <svg width="12" height="12" viewBox="0 0 600 600"><path d="M600 2.28882e-05H0L300 600L600 2.28882e-05Z" fill="#dc2626"/></svg>
+                                {item.price_change_percentage_24h.toFixed(2)}
+                                </div>
+                        </td>
+                    }
+                    <td class="px-6 py-4">
+                        ${item.market_cap.toLocaleString()}
+                    </td>
+                </tr>
+                )
+            }): <div class="flex justify-center items-center gap-2 mb-4"><svg width="30" height="30" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>error-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="add" fill="#ff2600" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" id="Combined-Shape"> </path> </g> </g> </g></svg> <p class="text-[#ff2600] text-xl">Error al obtener la información</p></div>}
+        </tbody>
+    </table>
+</div>
