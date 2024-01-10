@@ -16,4 +16,4 @@ https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10
 
 ## Screenshots y vista previa
 
-![Top 10 Cryptos app screenshot](./screen.png)
+![Top 10 Cryptos app screenshot](./public/screen.png)
